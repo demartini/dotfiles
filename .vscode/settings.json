@@ -1,0 +1,12 @@
+{
+  "files.associations": {
+    "**/config/**/run_*": "shellscript",
+    "*.fish.tmpl": "fish",
+    "*.json.tmpl": "go-template",
+    "*.sh.tmpl": "shellscript",
+    "*.toml.tmpl": "go-template",
+    "*.yaml.tmpl": "go-template",
+    "*.yml.tmpl": "go-template",
+    "*.tmpl": "go-template"
+  }
+}

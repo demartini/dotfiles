@@ -1,0 +1,35 @@
+# Demartini
+Host *
+  IdentityFile ~/.ssh/id_ed25519
+{{- if eq .chezmoi.os "darwin" }}
+  AddKeysToAgent yes
+  UseKeychain yes
+{{- end }}
+  #SCEIcon dev
+
+# GitHub
+Host *.github.com
+  IdentityFile ~/.ssh/pkg-demartini
+{{- if eq .chezmoi.os "darwin" }}
+  AddKeysToAgent yes
+  UseKeychain yes
+{{- end }}
+  #SCEIcon github
+
+# Media Server
+Host media-server
+  User demartini
+  HostName 192.168.77.38
+  Port 22
+  IdentityFile ~/.ssh/media-server
+  PreferredAuthentications publickey
+  #SCEIcon ubuntu
+
+# Media Server
+Host ms
+  User demartini
+  HostName 192.168.77.60
+  Port 22
+  IdentityFile ~/.ssh/media-server
+  PreferredAuthentications publickey
+  #SCEIcon ubuntu

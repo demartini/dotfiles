@@ -1,0 +1,235 @@
+# ----------------------------------
+# Global Configuration
+# ----------------------------------
+
+"$schema" = "https://starship.rs/config-schema.json"  # Specifies the schema for config validation.
+format = "$all$status$character"                      # Defines the prompt format using modules such as $all, $status, and $character.
+palette = "catppuccin_macchiato"                      # Sets a color palette for theme consistency.
+add_newline = false                                   # Avoids adding a newline before the prompt.
+
+# ----------------------------------
+# Modules Configuration
+# ----------------------------------
+
+[username]
+show_always = true                                    # Always displays the username in the prompt.
+
+[aws]
+symbol = "  "                                        # Sets a custom symbol for AWS-related information.
+disabled = true                                       # Disables the AWS module.
+
+[battery]
+disabled = true                                       # Disables the battery module.
+
+[buf]
+symbol = " "                                         # Sets a custom symbol for the Buf (Protocol Buffers) module.
+
+[c]
+symbol = " "                                         # Sets a custom symbol for the C programming language module.
+
+[conda]
+symbol = " "                                         # Sets a custom symbol for the Conda environment module.
+
+[crystal]
+symbol = " "                                         # Sets a custom symbol for the Crystal programming language module.
+
+[dart]
+symbol = " "                                         # Sets a custom symbol for the Dart programming language module.
+
+[directory]
+read_only = " 󰌾"                                      # Display a lock icon if the directory is read-only.
+truncation_length = 5                                 # Limits displayed directory path length to 5 segments.
+
+[docker_context]
+symbol = " "                                         # Sets a custom symbol for Docker context information.
+
+[elixir]
+symbol = " "                                         # Sets a custom symbol for the Elixir programming language module.
+
+[elm]
+symbol = " "                                         # Sets a custom symbol for the Elm programming language module.
+
+[fennel]
+symbol = " "                                         # Sets a custom symbol for the Fennel programming language module.
+
+[fossil_branch]
+symbol = " "                                         # Sets a custom symbol for Fossil VCS branch information.
+
+[git_branch]
+symbol = " "                                         # Sets a custom symbol for the Git branch.
+
+[golang]
+symbol = " "                                         # Sets a custom symbol for the Go programming language module.
+
+[guix_shell]
+symbol = " "                                         # Sets a custom symbol for Guix shell environment.
+
+[haskell]
+symbol = " "                                         # Sets a custom symbol for the Haskell programming language module.
+
+[haxe]
+symbol = " "                                         # Sets a custom symbol for the Haxe programming language module.
+
+[hg_branch]
+symbol = " "                                         # Sets a custom symbol for Mercurial (Hg) branch information.
+
+[hostname]
+ssh_symbol = " "                                     # Sets a symbol indicating SSH connection status for the hostname.
+
+[java]
+symbol = " "                                         # Sets a custom symbol for the Java programming language module.
+
+[julia]
+symbol = " "                                         # Sets a custom symbol for the Julia programming language module.
+
+[kotlin]
+symbol = " "                                         # Sets a custom symbol for the Kotlin programming language module.
+
+[lua]
+symbol = " "                                         # Sets a custom symbol for the Lua programming language module.
+
+[memory_usage]
+symbol = "󰍛 "                                         # Sets a custom symbol for memory usage information.
+
+[meson]
+symbol = "󰔷 "                                         # Sets a custom symbol for Meson build system.
+
+[nim]
+symbol = "󰆥 "                                         # Sets a custom symbol for the Nim programming language module.
+
+[nix_shell]
+symbol = " "                                         # Sets a custom symbol for the Nix shell environment.
+
+[nodejs]
+symbol = " "                                         # Sets a custom symbol for the Node.js environment module.
+
+[ocaml]
+symbol = " "                                         # Sets a custom symbol for the OCaml programming language module.
+
+[os]
+disabled = true                                       # Disables the OS module, which shows the current operating system.
+
+[os.symbols]
+# Customize symbols for various operating systems.
+Alpaquita = " "
+Alpine = " "
+Amazon = " "
+Android = " "
+Arch = " "
+Artix = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+OracleLinux = "󰌷 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+Redox = "󰀘 "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Windows = "󰍲 "
+
+[package]
+symbol = "󰏗 "                                         # Sets a custom symbol for the package version module.
+
+[perl]
+symbol = " "                                         # Sets a custom symbol for the Perl programming language module.
+
+[php]
+symbol = " "                                         # Sets a custom symbol for the PHP programming language module.
+
+[pijul_channel]
+symbol = " "                                         # Sets a custom symbol for the Pijul VCS channel.
+
+[python]
+symbol = " "                                         # Sets a custom symbol for the Python programming language module.
+
+[rlang]
+symbol = "󰟔 "                                         # Sets a custom symbol for the R programming language module.
+
+[ruby]
+symbol = " "                                         # Sets a custom symbol for the Ruby programming language module.
+
+[rust]
+symbol = " "                                         # Sets a custom symbol for the Rust programming language module.
+
+[scala]
+symbol = " "                                         # Sets a custom symbol for the Scala programming language module.
+
+[spack]
+symbol = "🅢 "                                        # Sets a custom symbol for the Spack package manager module.
+
+[shell]
+fish_indicator = '󰈺 '                                 # Indicator symbol when using Fish shell.
+powershell_indicator = '_'                           # Indicator symbol for PowerShell.
+unknown_indicator = 'mystery shell'                   # Message for an unknown shell.
+disabled = true                                       # Disables the shell module.
+
+[shlvl]
+symbol = " "                                         # Sets a custom symbol for the shell level (SHLVL) module.
+
+[status]
+disabled = true                                       # Disables the status module that shows the last command's exit status.
+
+[sudo]
+disabled = true                                       # Disables the sudo module that shows when running as root.
+
+[swift]
+symbol = " "                                         # Sets a custom symbol for the Swift programming language module.
+
+[zig]
+symbol = " "                                         # Sets a custom symbol for the Zig programming language module.
+
+# ----------------------------------
+# Custom Palette
+# ----------------------------------
+[palettes.catppuccin_macchiato]
+# Defines colors for the Catppuccin Macchiato color palette.
+rosewater = "#f4dbd6"
+flamingo = "#f0c6c6"
+pink = "#f5bde6"
+mauve = "#c6a0f6"
+red = "#ed8796"
+maroon = "#ee99a0"
+peach = "#f5a97f"
+yellow = "#eed49f"
+green = "#a6da95"
+teal = "#8bd5ca"
+sky = "#91d7e3"
+sapphire = "#7dc4e4"
+blue = "#8aadf4"
+lavender = "#b7bdf8"
+text = "#cad3f5"
+subtext1 = "#b8c0e0"
+subtext0 = "#a5adcb"
+overlay2 = "#939ab7"
+overlay1 = "#8087a2"
+overlay0 = "#6e738d"
+surface2 = "#5b6078"
+surface1 = "#494d64"
+surface0 = "#363a4f"
+base = "#24273a"
+mantle = "#1e2030"
+crust = "#181926"

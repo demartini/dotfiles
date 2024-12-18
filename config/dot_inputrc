@@ -1,0 +1,75 @@
+# ----------------------------------
+# Basic Input Options
+# ----------------------------------
+
+# Ignore case for completions
+set completion-ignore-case on
+
+# Apply case-insensitive completion even with case mismatches
+set completion-map-case on
+
+# Highlight the matching completion prefix
+set colored-completion-prefix on
+
+# Display file types with color
+set colored-stats on
+
+# Show file details like size and permissions in completions
+set visible-stats on
+
+# Skip completed text if there’s only one option left
+set skip-completed-text on
+
+# Enable 8-bit characters as input (supports accented characters)
+set input-meta on
+
+# Enable 8-bit characters in output
+set output-meta on
+
+# Disable conversion of meta key sequences
+set convert-meta off
+
+# Ignore hidden files (those beginning with ".") in completion by default
+set match-hidden-files off
+
+
+# ----------------------------------
+# History Options
+# ----------------------------------
+
+# Bind up arrow to search backward in history based on typed prefix
+"\e[A": history-search-backward
+
+# Bind down arrow to search forward in history based on typed prefix
+"\e[B": history-search-forward
+
+
+# ----------------------------------
+# Completion Options
+# ----------------------------------
+
+# Add trailing slash after directory symlinks
+set mark-symlinked-directories on
+
+# Increase the number of options shown before prompting
+set completion-query-items 200
+
+# Prevent pagination for completions; show all on a single screen
+set page-completions off
+
+# Show all completions automatically if input is ambiguous
+set show-all-if-ambiguous on
+
+
+# ----------------------------------
+# Cursor and Navigation Options
+# ----------------------------------
+
+# Move forward by one word with Alt+Right arrow
+"\e\e[C": forward-word
+
+# Move backward by one word with Alt+Left arrow
+"\e\e[D": backward-word
+
+# Delete the word before the cursor with Alt+Delete
+"\e[3;3~": kill-word

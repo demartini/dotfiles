@@ -1,0 +1,220 @@
+#!/usr/bin/env bash
+
+# Shell Functions
+# This file is sourced by both .bashrc and .zshrc
+
+# Function to clear the terminal screen
+c() {
+  clear "$@"
+}
+
+# Alias cat to bat
+cat() {
+  bat "$@"
+}
+
+# Function to remove .DS_Store files
+delds() {
+  echo "🔍 Searching for .DS_Store files to remove..."
+  if command -v fd &>/dev/null; then
+    files=$(sudo fd '^\.DS_Store$' --type file --hidden)
+  else
+    files=$(sudo find . -type f -name '*.DS_Store')
+  fi
+
+  if [ -z "$files" ]; then
+    echo "🚫 No .DS_Store files found."
+  else
+    for file in $files; do
+      echo "🗑️ Removing $file"
+      sudo rm "$file"
+    done
+    echo "✅ All .DS_Store files removed!"
+  fi
+}
+
+# Function to remove files starting with ._
+deldot() {
+  echo "🔍 Searching for files starting with ._ to remove..."
+  if command -v fd &>/dev/null; then
+    files=$(sudo fd '^\._' --type file --hidden)
+  else
+    files=$(sudo find . -type f -name '._*')
+  fi
+
+  if [ -z "$files" ]; then
+    echo "🚫 No files starting with ._ found."
+  else
+    for file in $files; do
+      echo "🗑️ Removing $file"
+      sudo rm "$file"
+    done
+    echo "✅ All ._ files removed!"
+  fi
+}
+
+# Function to flush macOS DNS cache
+flushdns() {
+  # Flush DNS cache
+  sudo dscacheutil -flushcache
+  sudo killall -HUP mDNSResponder
+
+  # Notify user of success
+  say "DNS Cleared Successfully!"
+}
+
+# Function to display the last 50 commands with timestamps
+h() {
+  history | tail -n 50 | while IFS= read -r line; do
+    # Extract the timestamp from the history line
+    timestamp=$(date -r "$(echo "$line" | awk '{print $1}')" +"%a %d/%m %R")
+
+    # Remove the history line number and leading space
+    command=$(echo "$line" | awk '{$1=""; sub(/^ /, ""); print $0}')
+
+    # Display the timestamp and command
+    echo "$timestamp $command"
+  done
+}
+
+# Function to convert iOS wallpapers to the right size
+ios-wallpaper() {
+  mkdir -p cropped
+  for file in *.jpg; do
+    convert "$file" -gravity center -crop 1284x2778+0+0 +repage cropped/"$file"
+  done
+}
+
+# Function to list directory contents with fallback to ls
+l() {
+  if command -v eza &>/dev/null; then
+    eza --header --long --git --icons --all --links --group "$@"
+  else
+    ls -lha "$@"
+  fi
+}
+
+# Function to show all installed Java versions
+listjdk() {
+  /usr/libexec/java_home -V
+}
+
+# Function to create and cd to directory
+mkcd() {
+  mkdir "$1" && cd "$1" || return 1
+}
+
+# Function to show PATH in a human-readable format
+path() {
+  echo "$PATH" | tr ':' '\n' | nl
+}
+
+# Function to show duplicated paths in $PATH
+path_check_duplicates() {
+  if [ -z "$PATH" ]; then
+    echo "PATH is empty or not set."
+    return 1
+  fi
+
+  echo "$PATH" | tr ':' '\n' | sort | uniq -d | nl
+}
+
+# Function to copy SSH public key to clipboard
+pubkey() {
+  if [ -f ~/.ssh/id_rsa.pub ]; then
+    pbcopy <"$HOME"/.ssh/id_rsa.pub && echo "=> Public key copied to clipboard."
+  elif [ -f ~/.ssh/id_ed25519.pub ]; then
+    pbcopy <"$HOME"/.ssh/id_ed25519.pub && echo "=> Public key copied to clipboard."
+  else
+    echo "No public key found."
+  fi
+}
+
+# Function to query all DNS records
+qdnsallr() {
+  # Set color to yellow (using tput for terminal color control)
+  tput setaf 3
+  echo "Querying All Records."
+
+  # Reset color back to normal
+  tput sgr0
+
+  # Use dig to query all DNS records
+  dig +nocmd "$@" any +noall +answer
+}
+
+# Function to query A records
+qdnsar() {
+  # Set color to yellow (using tput for terminal color control)
+  tput setaf 3
+  echo "Querying A records."
+
+  # Reset color back to normal
+  tput sgr0
+
+  # Use dig to query A records
+  dig +nocmd "$@" a +noall +answer
+}
+
+# Function to query CNAME records
+qdnscr() {
+  # Set color to yellow (using tput for terminal color control)
+  tput setaf 3
+  echo "Querying CNAME Records."
+
+  # Reset color back to normal
+  tput sgr0
+
+  # Use dig to query CNAME records
+  dig +nocmd "$@" cname +noall +answer
+}
+
+# Function to query MX records
+qdnsmr() {
+  # Set color to yellow (using tput for terminal color control)
+  tput setaf 3
+  echo "Querying MX Records."
+
+  # Reset color back to normal
+  tput sgr0
+
+  # Use dig to query MX records
+  dig +nocmd "$@" mx +noall +answer
+}
+
+# Function to query NS records
+qdnsnr() {
+  # Set color to yellow (using tput for terminal color control)
+  tput setaf 3
+  echo "Querying NS Records."
+
+  # Reset color back to normal
+  tput sgr0
+
+  # Use dig to query NS records
+  dig +nocmd "$@" ns +noall +answer
+}
+
+# Function to query TXT records
+qdnstr() {
+  # Set color to yellow (using tput for terminal color control)
+  tput setaf 3
+  echo "Querying TXT Records."
+
+  # Reset color back to normal
+  tput sgr0
+
+  # Use dig to query TXT records
+  dig +nocmd "$@" txt +noall +answer
+}
+
+# Function to restart the current shell
+reload() {
+  exec "$SHELL" -l "$@"
+}
+
+# Function to reset the Launchpad layout
+rlp() {
+  defaults write com.apple.dock ResetLaunchPad -bool true
+  killall Dock
+}

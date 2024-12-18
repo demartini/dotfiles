@@ -1,0 +1,15 @@
+:verbose: true
+# Enables verbose output for detailed messages during gem commands.
+
+:sources:
+  - https://rubygems.org
+# Specifies the default source (repository) for downloading gems.
+
+:benchmark: false
+# Disables benchmarking, so RubyGems will not measure or report the time taken for operations.
+
+:update_sources: true
+# Allows RubyGems to update its list of gem sources automatically.
+
+gem: --no-document
+# Sets the default option for the `gem` command to avoid installing documentation for gems.

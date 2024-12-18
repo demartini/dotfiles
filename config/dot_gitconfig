@@ -1,0 +1,208 @@
+# ----------------------------------
+# Apply Options
+# ----------------------------------
+[apply]
+
+  # Detect and automatically fix whitespace errors when applying a patch.
+  whitespace = fix
+
+
+# ----------------------------------
+# Branch Options
+# ----------------------------------
+[branch]
+
+  # Show branches sorted by the most recent commit date, with the latest first.
+  sort = -committerdate
+
+
+# ----------------------------------
+# Color Options
+# ----------------------------------
+[color]
+
+  # Enable color for Git command output when displayed in the terminal.
+  ui = true
+
+[color "branch"]
+
+  # Define color schemes for branches.
+  current = yellow reverse        # Current branch highlighted in yellow with a reverse color effect.
+  local = yellow                  # Local branches in yellow.
+  remote = green                  # Remote branches in green.
+
+[color "diff"]
+
+  # Define color schemes for diffs.
+  meta = 11                     # Metadata in light yellow.
+  frag = magenta bold           # Section info (e.g., line numbers) in magenta bold.
+  func = 146 bold               # Function names in light blue bold.
+  commit = yellow bold          # Commit hashes in yellow bold.
+  old = red bold                # Deleted lines in red bold.
+  new = green bold              # Added lines in green bold.
+  whitespace = red reverse      # Whitespace issues highlighted in red reverse.
+
+[color "diff-highlight"]
+
+  # Customize color for `diff-highlight` tool.
+  oldNormal = red bold           # Normal old (deletion) lines.
+  oldHighlight = red bold 52     # Highlighted old (deletion) lines.
+  newNormal = green bold         # Normal new (addition) lines.
+  newHighlight = green bold 22   # Highlighted new (addition) lines.
+
+[color "status"]
+
+  # Define color schemes for status output.
+  added = green bold              # Added files in green bold.
+  changed = red bold strike       # Changed files in red bold with a strikethrough effect.
+  untracked = cyan                # Untracked files in cyan.
+  branch = yellow black bold ul   # Branch name highlighted in yellow with black background, bold, and underlined.
+
+
+# ----------------------------------
+# Core Options
+# ----------------------------------
+[core]
+
+  # Specify a global `.gitignore` file for ignored files across all projects.
+  excludesfile = ~/.gitignore
+
+  # Specify a global `.gitattributes` file for custom file attributes.
+  attributesfile = ~/.gitattributes
+
+  # Disable checking the ctime of files to avoid issues with `git rebase` on macOS.
+  trustctime = false
+
+  # Prevent issues with non-ASCII characters in filenames on macOS.
+  precomposeunicode = false
+
+  # Cache information about untracked files to improve performance on `git status`.
+  untrackedCache = true
+
+  # Use `diff-so-fancy` for enhanced diffs, piped through `less` with specific flags.
+  pager = diff-so-fancy | less --tabs=4 -RF
+
+
+# ----------------------------------
+# Credential Options
+# ----------------------------------
+[credential]
+
+  # Use Git Credential Manager for authentication and credential storage.
+  helper = /usr/local/bin/git-credential-manager
+
+[credential "https://dev.azure.com"]
+
+  # Use the full HTTP path as the credential identifier.
+  useHttpPath = true
+
+
+# ----------------------------------
+# Diff Options
+# ----------------------------------
+[diff]
+
+  # Highlight moved blocks of text of at least 20 characters separately in diffs.
+  colorMoved = zebra
+
+  # Detect and show copies in diffs, in addition to renames.
+  renames = copies
+
+  # Show summaries for submodule changes in diffs.
+  submodule = log
+
+[diff "bin"]
+
+  # Use `hexdump` to display binary file diffs in a human-readable format.
+  textconv = hexdump --canonical --no-squeezing
+
+
+# ----------------------------------
+# Interactive Options
+# ----------------------------------
+[interactive]
+
+  # Use `diff-so-fancy` for better interactive diffs in commands like `git add -p`.
+  diffFilter = diff-so-fancy --patch
+
+
+# ----------------------------------
+# Filter Options (Git LFS)
+# ----------------------------------
+[filter "lfs"]
+
+  # Set up Git LFS (Large File Storage) filters for handling large files.
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+
+
+# ----------------------------------
+# GPG (GNU Privacy Guard) Options
+# ----------------------------------
+[gpg]
+
+  # Specify the location of the GPG program for signing commits.
+  program = /usr/local/bin/gpg
+
+
+# ----------------------------------
+# Help Options
+# ----------------------------------
+[help]
+
+  # Automatically correct minor typos in Git commands, with a short delay.
+  autocorrect = 1
+
+
+# ----------------------------------
+# Init Options
+# ----------------------------------
+[init]
+
+  # Set 'main' as the default branch name for new repositories.
+  defaultBranch = main
+
+
+# ----------------------------------
+# Merge Options
+# ----------------------------------
+[merge]
+
+  # Include summaries of merged commits in the message of the newly created merge commit.
+  log = true
+
+
+# ----------------------------------
+# Push Options
+# ----------------------------------
+[push]
+
+  # When pushing branches, include any associated annotated tags.
+  followTags = true
+
+
+# ----------------------------------
+# User Options
+# ----------------------------------
+[user]
+
+  # [!] IMPORTANT: Do NOT store sensitive information in this file,
+  # including Git credentials (such as `name` and `email`) or
+  # private signing keys (`signingkey`). Instead, store sensitive
+  # details in `~/.gitconfig.local`, which is kept outside of version
+  # control and will not be shared.
+
+  # Only use configuration from `.gitconfig` files and not default to system settings.
+  useConfigOnly = true
+
+
+# ----------------------------------
+# Include Additional Configurations
+# ----------------------------------
+[include]
+
+  # Include local configurations from separate files.
+  path = ~/.gitconfig.local                 # Personal configurations
+  path = ~/.config/gitalias/gitalias.txt    # Custom aliases

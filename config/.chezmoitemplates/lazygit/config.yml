@@ -1,0 +1,31 @@
+# Config relating to the Lazygit UI
+gui:
+  theme:
+    activeBorderColor:
+      - "#b7bdf8"
+      - bold
+    inactiveBorderColor:
+      - "#a5adcb"
+    searchingActiveBorderColor:
+      - "#eed49f"
+    optionsTextColor:
+      - "#8aadf4"
+    selectedLineBgColor:
+      - "#363a4f"
+    cherryPickedCommitFgColor:
+      - "#b7bdf8"
+    cherryPickedCommitBgColor:
+      - "#494d64"
+    unstagedChangesColor:
+      - "#ed8796"
+    defaultFgColor:
+      - "#cad3f5"
+  authorColors:
+    "*": "#b7bdf8"
+  nerdFontsVersion: "3"
+
+# Config relating to git
+git:
+  paging:
+    colorArg: always
+    pager: diff-so-fancy

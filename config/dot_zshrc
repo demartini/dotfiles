@@ -1,0 +1,147 @@
+# shellcheck shell=zsh
+
+# Set TERM to xterm-256color
+export TERM="xterm-256color"
+
+# History Configuration
+export HISTFILE="$HOME/.zsh_history"
+export HISTSIZE=$((32 ** 3))
+export SAVEHIST=$((32 ** 3))
+export HISTCONTROL="ignoreboth"
+
+# Homebrew Configuration
+export HOMEBREW_NO_ENV_HINTS=1
+export HOMEBREW_AUTO_UPDATE_SECS=3600
+
+# Language and Locale
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
+# Editor and Pager
+export EDITOR="nano"
+export VISUAL="code"
+export PAGER="less -X"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# Tealdeer Config Directory
+export TEALDEER_CONFIG_DIR="$HOME/.config/tealdeer"
+
+# Load Custom Functions
+source ~/.aliases
+source ~/.functions
+
+# fnm - https://github.com/Schniz/fnm
+if command -v fnm &>/dev/null; then
+  eval "$(fnm env --use-on-cd --shell zsh)"
+fi
+
+# npm - https://github.com/npm
+if command -v npm &>/dev/null; then
+  NPM_GLOBAL="$HOME/.npm-global"
+  export NPM_GLOBAL
+  export PATH="$NPM_GLOBAL/bin:$PATH"
+fi
+
+# pnpm - https://github.com/pnpm/pnpm
+if command -v pnpm &>/dev/null; then
+  PNPM_HOME="$HOME/.pnpm-global"
+  export PNPM_HOME
+  export PATH="$PNPM_HOME:$PATH"
+fi
+
+# Android Studio SDK - https://developer.android.com/tools
+if [ -d "$HOME/Library/Android/sdk" ]; then
+  ANDROID_HOME="$HOME/Library/Android/sdk"
+  export ANDROID_HOME
+
+  PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH"
+  export PATH
+fi
+
+# Go - https://github.com/golang/go
+if command -v go &>/dev/null; then
+  GOPATH="$HOME/go"
+  export GOPATH
+
+  GOROOT="$(brew --prefix golang)/libexec"
+  export GOROOT
+
+  PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
+  export PATH
+fi
+
+# Ruby - https://github.com/ruby/ruby
+if command -v ruby &>/dev/null; then
+  RUBY_PATH="$(brew --prefix ruby)/bin"
+  export PATH="$RUBY_PATH:$PATH"
+
+  # Ensure gems are available
+  GEM_HOME="$HOME/.gems"
+  export GEM_HOME
+  export PATH="$GEM_HOME/bin:$PATH"
+fi
+
+# Rust - https://github.com/rust-lang/rustup
+if [[ -d "$HOME/.cargo" ]]; then
+  source "$HOME/.cargo/env"
+fi
+
+# jenv - https://github.com/jenv/jenv
+if command -v jenv &>/dev/null; then
+  export PATH="$HOME/.jenv/bin:$PATH"
+  eval "$(jenv init -)"
+fi
+
+# Pyenv - https://github.com/pyenv/pyenv
+if command -v pyenv &>/dev/null; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
+
+# The Fuck - https://github.com/nvbn/thefuck
+if command -v thefuck &>/dev/null; then
+  eval "$(thefuck --alias --enable-experimental-instant-mode)"
+fi
+
+# Atuin - https://github.com/atuinsh/atuin
+if command -v atuin &>/dev/null; then
+  eval "$(atuin init zsh --disable-up-arrow)"
+fi
+
+# fzf - https://github.com/junegunn/fzf
+if command -v fzf &>/dev/null; then
+  export FZF_DEFAULT_COMMAND="rg --files --no-ignore --hidden --follow --glob '!.git/*'"
+  export FZF_DEFAULT_OPTS="\
+        --color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
+        --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+        --color=marker:#b7bdf8,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796 \
+        --color=selected-bg:#494d64 \
+        --multi"
+  source <(fzf --zsh)
+fi
+
+# zoxide - https://github.com/ajeetdsouza/zoxide
+if command -v zoxide &>/dev/null; then
+  eval "$(zoxide init zsh)"
+fi
+
+# Starship - https://github.com/starship/starship
+if command -v starship &>/dev/null; then
+  eval "$(starship init zsh)"
+fi
+
+# Zinit - https://github.com/zdharma-continuum/zinit
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Zinit - Plugins
+zinit wait lucid for \
+  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+  zdharma-continuum/fast-syntax-highlighting \
+  blockf \
+  zsh-users/zsh-completions \
+  atload"!_zsh_autosuggest_start" \
+  zsh-users/zsh-autosuggestions
